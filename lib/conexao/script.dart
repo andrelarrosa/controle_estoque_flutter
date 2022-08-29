@@ -1,11 +1,5 @@
 final criarBanco = [
   '''
-    CREATE TABLE cidade(
-      id INTEGER NOT NULL PRIMARY KEY,
-      nome TEXT NOT NULL
-    )
-  ''',
-  '''
     CREATE TABLE cliente(
       id INTEGER NOT NULL PRIMARY KEY,
       nome TEXT NOT NULL,
