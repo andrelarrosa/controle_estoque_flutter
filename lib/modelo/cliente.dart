@@ -1,4 +1,4 @@
-import 'package:controle_estoque_flutter/modelo/cidade.dart';
+import 'dart:ffi';
 
 class Cliente {
   final dynamic id;

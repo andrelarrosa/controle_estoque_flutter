@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 class ClienteDAO {
   Future<bool> salvar(Cliente cliente) async {
     Database db = await Conexao.abrirConexao();
-    const sql = 'INSERT INTO cliente(nome, cpf) VALUES (?, ?)';
+    const sql = 'INSERT INTO cliente (nome, cpf) VALUES (?, ?)';
     var linhasAfetadas = await db.rawInsert(sql, [cliente.nome, cliente.cpf]);
     return linhasAfetadas > 0;
   }

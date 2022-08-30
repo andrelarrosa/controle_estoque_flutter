@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:controle_estoque_flutter/conexao/conexao.dart';
 import 'package:controle_estoque_flutter/modelo/produto.dart';
 import 'package:sqflite/sqflite.dart';
@@ -9,8 +7,11 @@ class ProdutoDAO {
     Database db = await Conexao.abrirConexao();
     const sql =
         'INSERT INTO produto(descricao, precoVenda, precoCompra) VALUES (?, ?, ?)';
-    var linhasAfetadas = await db.rawInsert(
-        sql, [produto.descricao, produto.precoVenda, produto.precoCompra]);
+    var linhasAfetadas = await db.rawInsert(sql, [
+      produto.descricao.toString(),
+      produto.precoVenda,
+      produto.precoCompra
+    ]);
     return linhasAfetadas > 0;
   }
 
@@ -24,7 +25,7 @@ class ProdutoDAO {
       produto.precoCompra,
       produto.id
     ]);
-    return linhasAfetadas > 0;
+    return linhasAfetadas >= 0;
   }
 
   Future<Produto> consultar(int id) async {
@@ -53,7 +54,7 @@ class ProdutoDAO {
       const sql = 'DELETE FROM produto WHERE id = ?';
       db = await Conexao.abrirConexao();
       int linhasAfetadas = await db.rawDelete(sql, [id]);
-      return linhasAfetadas > 0;
+      return linhasAfetadas >= 0;
     } catch (e) {
       throw Exception('classe ProdutoDAO, método excluir');
     }
