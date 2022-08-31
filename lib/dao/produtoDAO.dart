@@ -25,7 +25,7 @@ class ProdutoDAO {
       produto.precoCompra,
       produto.id
     ]);
-    return linhasAfetadas >= 0;
+    return linhasAfetadas > 0;
   }
 
   Future<Produto> consultar(int id) async {
@@ -54,7 +54,7 @@ class ProdutoDAO {
       const sql = 'DELETE FROM produto WHERE id = ?';
       db = await Conexao.abrirConexao();
       int linhasAfetadas = await db.rawDelete(sql, [id]);
-      return linhasAfetadas >= 0;
+      return linhasAfetadas > 0;
     } catch (e) {
       throw Exception('classe ProdutoDAO, método excluir');
     }
