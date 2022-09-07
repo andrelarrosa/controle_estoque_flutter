@@ -50,7 +50,7 @@ class ProdutoDAO {
 
   Future<bool> excluir(int id) async {
     late Database db;
-    try {
+    try { 
       const sql = 'DELETE FROM produto WHERE id = ?';
       db = await Conexao.abrirConexao();
       int linhasAfetadas = await db.rawDelete(sql, [id]);
@@ -61,7 +61,7 @@ class ProdutoDAO {
   }
 
   @override
-  Future<List<Produto>> listarTodos() async {
+  Future<List<Map<String, Object?>>> listarTodos() async {
     late Database db;
     try {
       const sql = 'SELECT * FROM produto';
@@ -75,7 +75,7 @@ class ProdutoDAO {
             precoVenda: linha['precoVenda'] as double,
             precoCompra: linha['precoCompra'] as double);
       }).toList();
-      return produtos;
+      return resultado;
     } catch (e) {
       throw Exception('classe ProdutoDAO, método listar');
     }
