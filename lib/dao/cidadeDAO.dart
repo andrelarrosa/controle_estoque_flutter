@@ -49,7 +49,7 @@ class CidadeDAO {
   }
 
   @override
-  Future<List<Cidade>> listarTodos() async {
+  Future<List<Map<String, Object?>>> listarTodos() async {
     late Database db;
     try {
       const sql = 'SELECT * FROM cidade';
@@ -59,7 +59,7 @@ class CidadeDAO {
       List<Cidade> cidades = resultado.map((linha) {
         return Cidade(id: linha['id'] as int, nome: linha['nome'].toString());
       }).toList();
-      return cidades;
+      return resultado;
     } catch (e) {
       throw Exception('classe CidadeDAO, método listar');
     }

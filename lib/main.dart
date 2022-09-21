@@ -1,6 +1,10 @@
-import 'package:controle_estoque_flutter/view/form_produto.dart';
+import 'package:controle_estoque_flutter/view/cidade/form_cidade.dart';
+import 'package:controle_estoque_flutter/view/cidade/lista_cidade.dart';
+import 'package:controle_estoque_flutter/view/cliente/form_cliente.dart';
+import 'package:controle_estoque_flutter/view/cliente/lista_cliente.dart';
+import 'package:controle_estoque_flutter/view/produto/form_produto.dart';
+import 'package:controle_estoque_flutter/view/produto/lista_produto.dart';
 import 'package:flutter/material.dart';
-import 'package:controle_estoque_flutter/view/lista_produto.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +24,9 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => const ListaProdutoReativo(),
-        '/produtoForm': (context) => ProdutoForm()
+        '/produtoForm': (context) => ProdutoForm(),
+        '/clienteForm': (context) => ClienteForm(),
+        '/cidadeForm': (context) => CidadeForm(),
       },
     );
   }
