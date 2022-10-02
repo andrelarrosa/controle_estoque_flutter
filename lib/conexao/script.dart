@@ -23,7 +23,13 @@ final criarBanco = [
     );
   ''',
   '''
+  CREATE TABLE usuario(
+    id INTEGER NOT NULL PRIMARY KEY,
+    nome TEXT NOT NULL,
+    senha TEXT NOT NULL
+  );
+  ''',
+  '''
     INSERT INTO produto(descricao, precoVenda, precoCompra) VALUES (\"detergente\", 1.20, 0.80)
   ''',
-  
 ];
