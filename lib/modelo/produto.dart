@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Produto {
   final dynamic id;
   final String descricao;

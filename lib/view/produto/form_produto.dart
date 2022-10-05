@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:controle_estoque_flutter/dao/produtoDAO.dart';
 import 'package:controle_estoque_flutter/modelo/produto.dart';
 import 'package:flutter/material.dart';

@@ -4,6 +4,10 @@ import 'package:controle_estoque_flutter/view/cliente/form_cliente.dart';
 import 'package:controle_estoque_flutter/view/cliente/lista_cliente.dart';
 import 'package:controle_estoque_flutter/view/produto/form_produto.dart';
 import 'package:controle_estoque_flutter/view/produto/lista_produto.dart';
+import 'package:controle_estoque_flutter/view/usuario/form_usuario.dart';
+import 'package:controle_estoque_flutter/view/usuario/avatar_generico.dart';
+import 'package:controle_estoque_flutter/view/usuario/usuario_avatar.dart';
+import 'package:controle_estoque_flutter/view/usuario/usuario_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/': (context) => const ListaProdutoReativo(),
+        '/': (context) => Usuario(),
         '/produtoForm': (context) => ProdutoForm(),
         '/clienteForm': (context) => ClienteForm(),
         '/cidadeForm': (context) => CidadeForm(),

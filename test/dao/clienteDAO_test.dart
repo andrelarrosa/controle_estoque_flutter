@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:controle_estoque_flutter/dao/clienteDAO.dart';
 import 'package:controle_estoque_flutter/modelo/cidade.dart';
 import 'package:controle_estoque_flutter/modelo/cliente.dart';

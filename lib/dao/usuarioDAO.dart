@@ -7,8 +7,7 @@ class usuarioDAO {
   Future<bool> salvar(Usuario usuario) async {
     Database db = await Conexao.abrirConexao();
     const sql = 'INSERT INTO usuario (nome, cpf, cidade_id) VALUES (?, ?, ?)';
-    var linhasAfetadas =
-        await db.rawInsert(sql, [usuario.nome, usuario.cpf, usuario.cidade.id]);
+    var linhasAfetadas = await db.rawInsert(sql, [usuario.nome, usuario.senha]);
     return linhasAfetadas > 0;
   }
 
@@ -30,7 +29,7 @@ class usuarioDAO {
       Usuario usuario = Usuario(
           id: resultado['id'] as int,
           nome: resultado['nome'].toString(),
-          cpf: resultado['senha'].toString());
+          senha: resultado['senha'].toString());
       return usuario;
     } catch (e) {
       throw Exception('classe usuarioDAO, método consultar');
@@ -65,7 +64,7 @@ class usuarioDAO {
         return Usuario(
             id: linha['id'] as int,
             nome: linha['nome'].toString(),
-            cpf: linha['senha'].toString());
+            senha: linha['senha'].toString());
       }).toList();
       return resultado;
     } catch (e) {
