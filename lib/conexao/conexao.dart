@@ -14,6 +14,7 @@ class Conexao {
         version: 10,
         onCreate: (db, version) {
           for (var comando in criarBanco) {
+            print(comando);
             db.execute(comando);
           }
         },

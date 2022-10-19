@@ -30,6 +30,6 @@ final criarBanco = [
   );
   ''',
   '''
-    INSERT INTO produto(descricao, precoVenda, precoCompra) VALUES (\"detergente\", 1.20, 0.80)
+    INSERT INTO usuario(nome, senha) VALUES (\"teste\", \"teste\");
   ''',
 ];

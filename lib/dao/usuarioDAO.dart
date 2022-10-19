@@ -38,6 +38,21 @@ class usuarioDAO {
     }
   }
 
+  Future<Usuario> logar(String nome, String senha) async {
+    late Database db;
+    const sql = "SELECT * FROM usuario WHERE nome=? AND senha=?";
+    db = await Conexao.abrirConexao();
+    Map<String, Object?> resultado =
+        (await db.rawQuery(sql, [nome, senha])).first;
+    if (resultado.isEmpty) throw Exception('Sem registros com este id');
+    Usuario usuario = Usuario(
+        id: resultado['id'] as int,
+        nome: resultado['nome'].toString(),
+        senha: resultado['senha'].toString());
+    db.close();
+    return usuario;
+  }
+
   Future<bool> excluir(int id) async {
     late Database db;
     try {
