@@ -2,11 +2,16 @@ import 'package:controle_estoque_flutter/dao/clienteDAO.dart';
 import 'package:controle_estoque_flutter/modelo/cidade.dart';
 import 'package:controle_estoque_flutter/modelo/cliente.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:flutter/services.dart';
 
-// ignore: must_be_immutable
-class ClienteForm extends StatelessWidget {
+class ClienteForm extends StatefulWidget {
+  const ClienteForm({Key? key}) : super(key: key);
+
+  @override
+  State<ClienteForm> createState() => _ClienteFormState();
+}
+
+class _ClienteFormState extends State<ClienteForm> {
   dynamic id;
   String? nome;
   String? cpf;
@@ -30,7 +35,18 @@ class ClienteForm extends StatelessWidget {
                 icon: const Icon(Icons.save),
                 onPressed: () {
                   dao.salvar(Cliente(nome: nome!, cpf: cpf!, cidade: cidade!));
-                  Navigator.pop(context, '/');
+                  Navigator.pushNamed(context, '/clienteLista').then((value) {
+                    SystemChrome.setPreferredOrientations(
+                        [DeviceOrientation.portraitDown]);
+                  });
+                }),
+            IconButton(
+                icon: const Icon(Icons.list),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/clienteLista').then((value) {
+                    SystemChrome.setPreferredOrientations(
+                        [DeviceOrientation.portraitDown]);
+                  });
                 }),
           ],
         ),

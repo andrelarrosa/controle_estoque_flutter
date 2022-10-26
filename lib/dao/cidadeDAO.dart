@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 class CidadeDAO {
   Future<bool> salvar(Cidade cidade) async {
     Database db = await Conexao.abrirConexao();
-    const sql = 'INSERT INTO cidade (nome) VALUES (?, ?)';
+    const sql = 'INSERT INTO cidade (nome) VALUES (?)';
     var linhasAfetadas = await db.rawInsert(sql, [cidade.nome]);
     return linhasAfetadas > 0;
   }

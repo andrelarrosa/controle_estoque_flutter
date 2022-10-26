@@ -1,5 +1,7 @@
 import 'package:controle_estoque_flutter/dao/cidadeDAO.dart';
+import 'package:controle_estoque_flutter/view/utils/genericos/icone_function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ListaCidadeReativo extends StatefulWidget {
   const ListaCidadeReativo({Key? key}) : super(key: key);
@@ -12,16 +14,20 @@ class _ListaCidadeReativoState extends State<ListaCidadeReativo> {
   CidadeDAO cidadeDAO = new CidadeDAO();
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+
     return Scaffold(
         appBar: AppBar(
-          title: const Text(''),
+          title: const Text('Lista de Cidade'),
           actions: [
-            IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: () =>
-                    Navigator.pushNamed(context, '/cidadeForm').then((value) {
-                      setState(() {});
-                    }))
+            IconFunction(
+              iconeBotao: Icon(Icons.add),
+              function: () {
+                Navigator.pushNamed(context, '/cidadeForm').then((value) {
+                  setState(() {});
+                });
+              },
+            ),
           ],
         ),
         body: FutureBuilder(

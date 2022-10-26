@@ -1,11 +1,17 @@
 import 'package:controle_estoque_flutter/dao/cidadeDAO.dart';
 import 'package:controle_estoque_flutter/modelo/cidade.dart';
+import 'package:controle_estoque_flutter/view/utils/genericos/icone_function.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:flutter/services.dart';
 
-// ignore: must_be_immutable
-class CidadeForm extends StatelessWidget {
+class CidadeForm extends StatefulWidget {
+  const CidadeForm({Key? key}) : super(key: key);
+
+  @override
+  State<CidadeForm> createState() => _CidadeFormState();
+}
+
+class _CidadeFormState extends State<CidadeForm> {
   dynamic id;
   String? nome;
 
@@ -23,20 +29,35 @@ class CidadeForm extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Cadastro Cidade'),
           actions: [
-            IconButton(
-                icon: const Icon(Icons.save),
-                onPressed: () {
-                  dao.salvar(Cidade(nome: nome!));
-                  Navigator.pop(context, '/');
-                }),
+            IconFunction(
+              iconeBotao: Icon(Icons.add),
+              function: () {
+                dao.salvar(Cidade(nome: cidade));
+                Navigator.pushNamed(context, '/cidadeLista').then((value) {
+                  SystemChrome.setPreferredOrientations(
+                      [DeviceOrientation.portraitDown]);
+                  setState(() {});
+                });
+              },
+            ),
+            IconFunction(
+              iconeBotao: Icon(Icons.list),
+              function: () {
+                Navigator.pushNamed(context, '/cidadeLista').then((value) {
+                  SystemChrome.setPreferredOrientations(
+                      [DeviceOrientation.portraitDown]);
+                  setState(() {});
+                });
+              },
+            ),
           ],
         ),
         body: Form(
           child: Column(children: [
             TextFormField(
               decoration: InputDecoration(label: Text("Nome da Cidade")),
-              onChanged: (valorDigitado) => nome = valorDigitado,
-              initialValue: nome,
+              onChanged: (valorDigitado) => cidade = valorDigitado,
+              initialValue: cidade,
             ),
           ]),
         ));

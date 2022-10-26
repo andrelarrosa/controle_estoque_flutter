@@ -1,5 +1,7 @@
 import 'package:controle_estoque_flutter/dao/clienteDAO.dart';
+import 'package:controle_estoque_flutter/view/utils/genericos/icone_function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ListaClienteReativo extends StatefulWidget {
   const ListaClienteReativo({Key? key}) : super(key: key);
@@ -12,16 +14,19 @@ class _ListaClienteReativoState extends State<ListaClienteReativo> {
   ClienteDAO clienteDAO = new ClienteDAO();
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
     return Scaffold(
         appBar: AppBar(
           title: const Text(''),
           actions: [
-            IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: () =>
-                    Navigator.pushNamed(context, '/clienteForm').then((value) {
-                      setState(() {});
-                    }))
+            IconFunction  (
+              iconeBotao: Icon(Icons.add),
+              function: () {
+                Navigator.pushNamed(context, '/clienteForm').then((value) {
+                  setState(() {});
+                });
+              },
+            ),
           ],
         ),
         body: FutureBuilder(

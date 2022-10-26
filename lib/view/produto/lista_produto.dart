@@ -1,4 +1,5 @@
 import 'package:controle_estoque_flutter/dao/produtoDAO.dart';
+import 'package:controle_estoque_flutter/view/utils/genericos/icone_function.dart';
 import 'package:flutter/material.dart';
 
 class ListaProdutoReativo extends StatefulWidget {
@@ -14,14 +15,16 @@ class _ListaProdutoReativoState extends State<ListaProdutoReativo> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(''),
+          title: const Text('Produtos'),
           actions: [
-            IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: () =>
-                    Navigator.pushNamed(context, '/produtoForm').then((value) {
-                      setState(() {});
-                    }))
+            IconFunction(
+              iconeBotao: Icon(Icons.add),
+              function: () {
+                Navigator.pushNamed(context, '/produtoForm').then((value) {
+                  setState(() {});
+                });
+              },
+            )
           ],
         ),
         body: FutureBuilder(

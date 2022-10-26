@@ -1,7 +1,10 @@
 import 'package:controle_estoque_flutter/view/cidade/form_cidade.dart';
+import 'package:controle_estoque_flutter/view/cidade/form_cidade.dart';
 import 'package:controle_estoque_flutter/view/cidade/lista_cidade.dart';
 import 'package:controle_estoque_flutter/view/cliente/form_cliente.dart';
+import 'package:controle_estoque_flutter/view/cliente/form_cliente.dart';
 import 'package:controle_estoque_flutter/view/cliente/lista_cliente.dart';
+import 'package:controle_estoque_flutter/view/inicial/lista_inicial.dart';
 import 'package:controle_estoque_flutter/view/login/form_login.dart';
 import 'package:controle_estoque_flutter/view/produto/form_produto.dart';
 import 'package:controle_estoque_flutter/view/produto/lista_produto.dart';
@@ -28,9 +31,13 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginForm(),
         '/produtoForm': (context) => ProdutoForm(),
+        '/produtoLista': (context) => ListaProdutoReativo(),
         '/clienteForm': (context) => ClienteForm(),
+        '/clienteLista': (context) => ListaClienteReativo(),
         '/usuarioForm': (context) => UsuarioForm(),
         '/cidadeForm': (context) => CidadeForm(),
+        '/cidadeLista': (context) => ListaCidadeReativo(),
+        '/telaInicial': (context) => TelaInicial(),
       },
     );
   }

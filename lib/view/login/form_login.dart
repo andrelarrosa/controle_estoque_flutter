@@ -2,6 +2,7 @@ import 'package:controle_estoque_flutter/dao/clienteDAO.dart';
 import 'package:controle_estoque_flutter/dao/usuarioDAO.dart';
 import 'package:controle_estoque_flutter/modelo/cidade.dart';
 import 'package:controle_estoque_flutter/modelo/usuario.dart';
+import 'package:controle_estoque_flutter/view/utils/genericos/botao_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
@@ -38,23 +39,20 @@ class LoginForm extends StatelessWidget {
                 height: 60.0,
                 child: Column(
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        if (!(nome == null || senha == null)) {
-                          dao.logar(nome!, senha!);
-                          Navigator.of(context).pushNamed('/produtoForm');
-                        } else {
-                          print(nome);
-                          print(senha);
-                        }
+                    BotaoLink(
+                      textoBotao: 'Enviar',
+                      rotaTela: '/telaInicial',
+                      function: () {
+                        Navigator.of(context).pushNamed('/telaInicial');
                       },
-                      child: Text("Enviar"),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/usuarioForm');
+                    BotaoLink(
+                      textoBotao: "Recuperar acesso",
+                      rotaTela: '/usuarioForm',
+                      function: () {
+                        SystemChrome.setPreferredOrientations(
+                            [DeviceOrientation.portraitDown]);
                       },
-                      child: Text("Recuperar acesso"),
                     ),
                   ],
                 )),

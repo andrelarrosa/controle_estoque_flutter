@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:controle_estoque_flutter/conexao/conexao.dart';
 import 'package:controle_estoque_flutter/dao/cidadeDAO.dart';
 import 'package:controle_estoque_flutter/modelo/usuario.dart';
@@ -6,7 +8,7 @@ import 'package:sqflite/sqflite.dart';
 class usuarioDAO {
   Future<bool> salvar(Usuario usuario) async {
     Database db = await Conexao.abrirConexao();
-    const sql = 'INSERT INTO usuario (nome, cpf, cidade_id) VALUES (?, ?, ?)';
+    const sql = 'INSERT INTO usuario (nome, senha) VALUES (?, ?)';
     var linhasAfetadas = await db.rawInsert(sql, [usuario.nome, usuario.senha]);
     return linhasAfetadas > 0;
   }
@@ -38,19 +40,16 @@ class usuarioDAO {
     }
   }
 
-  Future<Usuario> logar(String nome, String senha) async {
+  Future<bool> logar(String nome, String senha) async {
     late Database db;
     const sql = "SELECT * FROM usuario WHERE nome=? AND senha=?";
     db = await Conexao.abrirConexao();
     Map<String, Object?> resultado =
         (await db.rawQuery(sql, [nome, senha])).first;
-    if (resultado.isEmpty) throw Exception('Sem registros com este id');
-    Usuario usuario = Usuario(
-        id: resultado['id'] as int,
-        nome: resultado['nome'].toString(),
-        senha: resultado['senha'].toString());
-    db.close();
-    return usuario;
+    if (resultado.isEmpty) {
+      return false;
+    }
+    return true;
   }
 
   Future<bool> excluir(int id) async {

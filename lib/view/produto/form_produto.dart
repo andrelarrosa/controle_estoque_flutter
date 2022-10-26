@@ -1,11 +1,16 @@
 import 'package:controle_estoque_flutter/dao/produtoDAO.dart';
 import 'package:controle_estoque_flutter/modelo/produto.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:flutter/services.dart';
 
-// ignore: must_be_immutable
-class ProdutoForm extends StatelessWidget {
+class ProdutoForm extends StatefulWidget {
+  const ProdutoForm({Key? key}) : super(key: key);
+
+  @override
+  State<ProdutoForm> createState() => _ProdutoFormState();
+}
+
+class _ProdutoFormState extends State<ProdutoForm> {
   dynamic id;
   String? descricao;
   double? precoVenda;
@@ -32,7 +37,7 @@ class ProdutoForm extends StatelessWidget {
                       descricao: descricao!,
                       precoCompra: precoVenda!,
                       precoVenda: precoCompra!));
-                  Navigator.pop(context, '/');
+                  Navigator.pushNamed(context, '/produtoLista');
                 }),
           ],
         ),
