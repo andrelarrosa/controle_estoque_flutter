@@ -39,13 +39,15 @@ class LoginForm extends StatelessWidget {
                 height: 60.0,
                 child: Column(
                   children: [
-                    BotaoLink(
-                      textoBotao: 'Enviar',
-                      rotaTela: '/telaInicial',
-                      function: () {
-                        Navigator.of(context).pushNamed('/telaInicial');
-                      },
-                    ),
+                    ElevatedButton(
+                        child: Text("Enviar"),
+                        onPressed: () async {
+                          bool logar = await dao.logar(nome!, senha!);
+                          print("teste");
+                          if (logar) {
+                            Navigator.of(context).pushNamed('/telaInicial');
+                          }
+                        }),
                     BotaoLink(
                       textoBotao: "Recuperar acesso",
                       rotaTela: '/usuarioForm',

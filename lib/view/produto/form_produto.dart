@@ -39,6 +39,14 @@ class _ProdutoFormState extends State<ProdutoForm> {
                       precoVenda: precoCompra!));
                   Navigator.pushNamed(context, '/produtoLista');
                 }),
+            IconButton(
+                icon: const Icon(Icons.list),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/produtoLista').then((value) {
+                    SystemChrome.setPreferredOrientations(
+                        [DeviceOrientation.portraitDown]);
+                  });
+                }),
           ],
         ),
         body: Form(

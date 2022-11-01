@@ -64,4 +64,6 @@ class CidadeDAO {
       throw Exception('classe CidadeDAO, método listar');
     }
   }
+
+  
 }
