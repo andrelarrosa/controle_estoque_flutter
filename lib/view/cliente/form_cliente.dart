@@ -15,6 +15,7 @@ class _ClienteFormState extends State<ClienteForm> {
   dynamic id;
   String? nome;
   String? cpf;
+  String? email;
   Cidade? cidade;
 
   ClienteDAO dao = new ClienteDAO();
@@ -34,7 +35,8 @@ class _ClienteFormState extends State<ClienteForm> {
             IconButton(
                 icon: const Icon(Icons.save),
                 onPressed: () {
-                  dao.salvar(Cliente(nome: nome!, cpf: cpf!, cidade: cidade!));
+                  dao.salvar(Cliente(
+                      nome: nome!, cpf: cpf!, email: email!, cidade: cidade!));
                   Navigator.pushNamed(context, '/clienteLista').then((value) {
                     SystemChrome.setPreferredOrientations(
                         [DeviceOrientation.portraitDown]);
@@ -61,6 +63,11 @@ class _ClienteFormState extends State<ClienteForm> {
               decoration: InputDecoration(label: Text("Digite o seu CPF")),
               onChanged: (valorDigitado) => cpf = valorDigitado,
               initialValue: cpf,
+            ),
+            TextFormField(
+              decoration: InputDecoration(label: Text("Digite o seu Email")),
+              onChanged: (valorDigitado) => email = valorDigitado,
+              initialValue: email,
             ),
           ]),
         ));

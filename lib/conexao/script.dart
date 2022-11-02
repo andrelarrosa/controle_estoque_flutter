@@ -10,6 +10,7 @@ final criarBanco = [
       id INTEGER NOT NULL PRIMARY KEY,
       nome TEXT NOT NULL,
       cpf TEXT NOT NULL,
+      email TEXT,
       cidade_id INTEGER,
       FOREIGN KEY (cidade_id) REFERENCES cidade(id)
     );

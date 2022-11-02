@@ -8,17 +8,24 @@ class ClienteDAO {
   CidadeDAO cidadeDAO = new CidadeDAO();
   Future<bool> salvar(Cliente cliente) async {
     Database db = await Conexao.abrirConexao();
-    const sql = 'INSERT INTO cliente (nome, cpf, cidade_id) VALUES (?, ?, ?)';
-    var linhasAfetadas =
-        await db.rawInsert(sql, [cliente.nome, cliente.cpf, cliente.cidade.id]);
+    const sql =
+        'INSERT INTO cliente (nome, cpf, email, cidade_id) VALUES (?, ?, ?, ?)';
+    var linhasAfetadas = await db.rawInsert(
+        sql, [cliente.nome, cliente.cpf, cliente.email, cliente.cidade.id]);
     return linhasAfetadas > 0;
   }
 
   Future<bool> alterar(Cliente cliente) async {
     Database db = await Conexao.abrirConexao();
-    const sql = 'UPDATE cliente SET nome=?, cpf=?, cidade_id=? WHERE id = ?';
-    var linhasAfetadas = await db.rawUpdate(
-        sql, [cliente.nome, cliente.cpf, cliente.cidade.id, cliente.id]);
+    const sql =
+        'UPDATE cliente SET nome=?, cpf=?, email=?, cidade_id=? WHERE id = ?';
+    var linhasAfetadas = await db.rawUpdate(sql, [
+      cliente.nome,
+      cliente.cpf,
+      cliente.email,
+      cliente.cidade.id,
+      cliente.id
+    ]);
     return linhasAfetadas > 0;
   }
 
@@ -33,6 +40,7 @@ class ClienteDAO {
         id: resultado['id'] as int,
         nome: resultado['nome'].toString(),
         cpf: resultado['cpf'].toString(),
+        email: resultado['email'].toString(),
         cidade: resultado['cidade_id'] as Cidade,
       );
       return cliente;
@@ -70,6 +78,7 @@ class ClienteDAO {
             id: linha['id'] as int,
             nome: linha['nome'].toString(),
             cpf: linha['cpf'].toString(),
+            email: linha['email'].toString(),
             cidade: linha['cidade_id'] as Cidade);
       }).toList();
       return resultado;

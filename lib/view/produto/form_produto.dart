@@ -37,7 +37,9 @@ class _ProdutoFormState extends State<ProdutoForm> {
                       descricao: descricao!,
                       precoCompra: precoVenda!,
                       precoVenda: precoCompra!));
-                  Navigator.pushNamed(context, '/produtoLista');
+                  Navigator.pushNamed(context, '/produtoLista').then((value) {
+                    setState(() {});
+                  });
                 }),
             IconButton(
                 icon: const Icon(Icons.list),

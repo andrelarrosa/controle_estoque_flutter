@@ -38,12 +38,25 @@ class _ListaProdutoReativoState extends State<ListaProdutoReativo> {
               itemBuilder: (context, contador) {
                 var produto = lista[contador];
                 return ListTile(
-                  title: Text(produto['descricao'].toString()),
-                  subtitle: Text(produto["precoVenda"].toString()),
-                  trailing: SizedBox(
-                    width: 100,
-                  ),
-                );
+                    title: Text(produto['descricao'].toString()),
+                    subtitle: Text(produto["precoVenda"].toString()),
+                    trailing: SizedBox(
+                        width: 100,
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              child: Icon(Icons.delete),
+                              onPressed: () {
+                                produtoDAO.excluir(
+                                    int.parse(produto['id'].toString()));
+                                Navigator.pushNamed(context, '/telaInicial')
+                                    .then((value) {
+                                  setState(() {});
+                                });
+                              },
+                            ),
+                          ],
+                        )));
               },
             );
           },

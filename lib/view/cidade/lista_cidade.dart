@@ -41,11 +41,24 @@ class _ListaCidadeReativoState extends State<ListaCidadeReativo> {
               itemBuilder: (context, contador) {
                 var cidade = lista[contador];
                 return ListTile(
-                  title: Text(cidade['nome'].toString()),
-                  trailing: SizedBox(
-                    width: 100,
-                  ),
-                );
+                    title: Text(cidade['nome'].toString()),
+                    trailing: SizedBox(
+                        width: 100,
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              child: Icon(Icons.delete),
+                              onPressed: () {
+                                cidadeDAO.excluir(
+                                    int.parse(cidade['id'].toString()));
+                                Navigator.pushNamed(context, '/telaInicial')
+                                    .then((value) {
+                                  setState(() {});
+                                });
+                              },
+                            ),
+                          ],
+                        )));
               },
             );
           },

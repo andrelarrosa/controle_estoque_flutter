@@ -43,9 +43,7 @@ class CidadeDAO {
       return linhasAfetadas > 0;
     } catch (e) {
       throw Exception('classe CidadeDAO, método excluir');
-    } finally {
-      db.close();
-    }
+    } finally {}
   }
 
   @override
@@ -64,6 +62,4 @@ class CidadeDAO {
       throw Exception('classe CidadeDAO, método listar');
     }
   }
-
-  
 }

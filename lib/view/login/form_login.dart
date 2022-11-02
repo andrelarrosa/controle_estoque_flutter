@@ -2,6 +2,7 @@ import 'package:controle_estoque_flutter/dao/clienteDAO.dart';
 import 'package:controle_estoque_flutter/dao/usuarioDAO.dart';
 import 'package:controle_estoque_flutter/modelo/cidade.dart';
 import 'package:controle_estoque_flutter/modelo/usuario.dart';
+import 'package:controle_estoque_flutter/view/inicial/lista_inicial.dart';
 import 'package:controle_estoque_flutter/view/utils/genericos/botao_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,7 +46,8 @@ class LoginForm extends StatelessWidget {
                           bool logar = await dao.logar(nome!, senha!);
                           print("teste");
                           if (logar) {
-                            Navigator.of(context).pushNamed('/telaInicial');
+                            // Navigator.of(context).pushNamed('/telaInicial');
+                            Navigator.of(context).push(_createRoute());
                           }
                         }),
                     BotaoLink(
@@ -60,5 +62,28 @@ class LoginForm extends StatelessWidget {
                 )),
           ]),
         ));
+  }
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const TelaInicial(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        final tween = Tween(begin: begin, end: end);
+        final curvedAnimation = CurvedAnimation(
+          parent: animation,
+          curve: curve,
+        );
+
+        return SlideTransition(
+          position: tween.animate(curvedAnimation),
+          child: child,
+        );
+      },
+    );
   }
 }

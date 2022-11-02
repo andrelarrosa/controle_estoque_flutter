@@ -2,6 +2,7 @@ import 'package:controle_estoque_flutter/dao/clienteDAO.dart';
 import 'package:controle_estoque_flutter/view/utils/genericos/icone_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListaClienteReativo extends StatefulWidget {
   const ListaClienteReativo({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _ListaClienteReativoState extends State<ListaClienteReativo> {
         appBar: AppBar(
           title: const Text(''),
           actions: [
-            IconFunction  (
+            IconFunction(
               iconeBotao: Icon(Icons.add),
               function: () {
                 Navigator.pushNamed(context, '/clienteForm').then((value) {
@@ -40,14 +41,41 @@ class _ListaClienteReativoState extends State<ListaClienteReativo> {
               itemBuilder: (context, contador) {
                 var cliente = lista[contador];
                 return ListTile(
-                  title: Text(cliente['nome'].toString()),
-                  trailing: SizedBox(
-                    width: 100,
-                  ),
-                );
+                    title: Text(cliente['nome'].toString()),
+                    trailing: SizedBox(
+                        width: 100,
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              child: Icon(Icons.delete),
+                              onPressed: () {
+                                clienteDAO.excluir(
+                                    int.parse(cliente['id'].toString()));
+                                Navigator.pushNamed(context, '/telaInicial')
+                                    .then((value) {
+                                  setState(() {});
+                                });
+                              },
+                            ),
+                            ElevatedButton(
+                              child: Icon(Icons.email),
+                              onPressed: () => {
+                                chamarEmail(int.parse(cliente['id'].toString()))
+                              },
+                            )
+                          ],
+                        )));
               },
             );
           },
         ));
+  }
+
+  chamarEmail(int id) {
+    dynamic cliente = clienteDAO.consultar(id);
+    launchUrl(Uri(scheme: "mailto", path: cliente['email'], queryParameters: {
+      'subject': 'Default Subject',
+      'body': 'Default body'
+    }));
   }
 }
